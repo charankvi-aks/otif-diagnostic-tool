@@ -1,0 +1,2 @@
+# otif-diagnostic-tool
+DIY_OTIF_Diagnostics_for_solutioning_SCM_challenges
