@@ -416,90 +416,90 @@ export default function OrderAssignmentEngine({ filters, assignedCarrierFlow }) 
   const itemBreakdown = Array.isArray(sData.request_details?.item_breakdown) ? sData.request_details.item_breakdown : DEFAULT_SIMULATION.request_details.item_breakdown;
 
   return (
-    <div className="space-y-6">
-      {/* Top Banner */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+    <div className="space-y-3">
+      {/* Compact Top Banner */}
+      <div className="bg-slate-900 border border-slate-800 rounded-lg p-3 shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white font-bold shadow-lg shadow-emerald-600/30">
-              <Zap className="w-5 h-5" />
+            <div className="w-7 h-7 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold shadow-md shadow-emerald-600/30">
+              <Zap className="w-4 h-4" />
             </div>
-            <h2 className="text-xl font-bold text-white">Multi-SKU Order & Profit Engine</h2>
-            <span className="px-2.5 py-0.5 text-xs font-bold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+            <h2 className="text-base font-black text-white">Multi-SKU Order & Profit Engine</h2>
+            <span className="px-2 py-0.5 text-[10px] font-bold rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
               Multi-Item Opt
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-3xl">
+          <p className="text-[11px] text-slate-400 mt-0.5 max-w-2xl">
             Optimizes multi-SKU fulfillment across DCs, SLAs, mfg costs, freight, and penalties to maximize net margin ($ & %).
           </p>
         </div>
 
-        <div className="bg-slate-950 px-4 py-3 rounded-xl border border-emerald-500/30 text-right shadow-inner">
-          <span className="text-[10px] text-emerald-400 uppercase font-semibold flex items-center justify-end gap-1">
-            <Sparkles className="w-3 h-3" /> Net Profit Lift
+        <div className="bg-slate-950 px-3 py-1.5 rounded-lg border border-emerald-500/30 text-right shadow-inner shrink-0">
+          <span className="text-[9px] text-emerald-400 uppercase font-semibold flex items-center justify-end gap-1">
+            <Sparkles className="w-2.5 h-2.5" /> Net Profit Lift
           </span>
-          <div className="text-2xl font-black text-emerald-400">
+          <div className="text-xl font-black text-emerald-400">
             +${safeNum(pData.potential_profit_lift_dollars).toLocaleString()}
           </div>
-          <span className="text-xs text-slate-400 font-medium">
+          <span className="text-[10px] text-slate-400 font-medium">
             +{safeNum(pData.potential_profit_lift_pct)}% margin expansion
           </span>
         </div>
       </div>
 
       {/* SECTION 1: MACRO PORTFOLIO PROFITABILITY SCORECARD */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+      <div className="bg-slate-900 border border-slate-800 rounded-lg p-3 shadow-md space-y-2.5">
+        <div className="flex items-center justify-between border-b border-slate-800 pb-2">
           <div>
-            <h3 className="text-base font-extrabold text-white flex items-center gap-2">
-              <TrendingUp className="w-5 h-5 text-emerald-400" />
+            <h3 className="text-xs font-extrabold text-white flex items-center gap-1.5 uppercase tracking-wider">
+              <TrendingUp className="w-4 h-4 text-emerald-400" />
               1. Macro Portfolio Profit Waterfall
             </h3>
-            <p className="text-xs text-slate-400">Financial impact breakdown of current fulfillment vs. SLA & assignment optimization</p>
+            <p className="text-[10px] text-slate-400">Financial impact breakdown of current fulfillment vs. SLA & assignment optimization</p>
           </div>
           <button
             onClick={fetchPortfolio}
-            className="flex items-center gap-1 text-xs text-slate-400 hover:text-white bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-700"
+            className="flex items-center gap-1 text-[10px] text-slate-400 hover:text-white bg-slate-800 px-2 py-0.5 rounded border border-slate-700"
           >
-            <RefreshCw className="w-3.5 h-3.5" /> Refresh Waterfall
+            <RefreshCw className="w-3 h-3" /> Refresh
           </button>
         </div>
 
         {loadingPortfolio ? (
-          <div className="py-8 text-center text-slate-400 text-xs">Computing Portfolio Waterfall...</div>
+          <div className="py-4 text-center text-slate-400 text-xs">Computing Portfolio Waterfall...</div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-1">
-              <span className="text-xs text-slate-400 font-medium">Gross Invoice</span>
-              <div className="text-xl font-extrabold text-slate-100">${safeNum(pData.total_revenue).toLocaleString()}</div>
-              <div className="text-[11px] text-slate-500">{safeNum(pData.total_orders)} order lines</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+            <div className="bg-slate-950 p-2.5 px-3 rounded-lg border border-slate-800 space-y-0.5">
+              <span className="text-[10px] text-slate-400 font-medium">Gross Invoice</span>
+              <div className="text-base font-extrabold text-slate-100">${safeNum(pData.total_revenue).toLocaleString()}</div>
+              <div className="text-[10px] text-slate-500">{safeNum(pData.total_orders)} order lines</div>
             </div>
 
-            <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-1">
-              <span className="text-xs text-slate-400 font-medium">Mfg + Freight</span>
-              <div className="text-xl font-extrabold text-slate-300">
+            <div className="bg-slate-950 p-2.5 px-3 rounded-lg border border-slate-800 space-y-0.5">
+              <span className="text-[10px] text-slate-400 font-medium">Mfg + Freight</span>
+              <div className="text-base font-extrabold text-slate-300">
                 ${(safeNum(pData.total_mfg_cost) + safeNum(pData.total_freight_cost)).toLocaleString()}
               </div>
-              <div className="text-[11px] text-slate-500">Mfg: ${safeNum(pData.total_mfg_cost).toLocaleString()} | Freight: ${safeNum(pData.total_freight_cost).toLocaleString()}</div>
+              <div className="text-[10px] text-slate-500">Mfg: ${safeNum(pData.total_mfg_cost).toLocaleString()} | Freight: ${safeNum(pData.total_freight_cost).toLocaleString()}</div>
             </div>
 
-            <div className="bg-slate-950 p-4 rounded-xl border border-rose-500/30 space-y-1">
-              <span className="text-xs text-rose-400 font-medium">Penalty Loss</span>
-              <div className="text-xl font-extrabold text-rose-400">
+            <div className="bg-slate-950 p-2.5 px-3 rounded-lg border border-rose-500/30 space-y-0.5">
+              <span className="text-[10px] text-rose-400 font-medium">Penalty Loss</span>
+              <div className="text-base font-extrabold text-rose-400">
                 -${safeNum(pData.total_penalties_loss).toLocaleString()}
               </div>
-              <div className="text-[11px] text-slate-500">Line-level penalties accrued</div>
+              <div className="text-[10px] text-slate-500">Line-level penalties accrued</div>
             </div>
 
-            <div className="bg-emerald-950/40 p-4 rounded-xl border border-emerald-500/40 space-y-1">
-              <span className="text-xs text-emerald-400 font-bold flex items-center justify-between">
+            <div className="bg-emerald-950/40 p-2.5 px-3 rounded-lg border border-emerald-500/40 space-y-0.5">
+              <span className="text-[10px] text-emerald-400 font-bold flex items-center justify-between">
                 <span>Opt Net Margin</span>
-                <span className="bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded text-[10px]">High to Low</span>
+                <span className="bg-emerald-500/20 text-emerald-300 px-1 py-0.2 rounded text-[9px]">High to Low</span>
               </span>
-              <div className="text-2xl font-black text-emerald-400">
+              <div className="text-lg font-black text-emerald-400">
                 ${safeNum(pData.optimized_net_profit).toLocaleString()}
               </div>
-              <div className="text-xs font-bold text-emerald-300">
+              <div className="text-[10px] font-bold text-emerald-300">
                 {safeNum(pData.optimized_net_margin_pct)}% Net Margin (vs {safeNum(pData.current_net_margin_pct)}% current)
               </div>
             </div>
@@ -508,42 +508,42 @@ export default function OrderAssignmentEngine({ filters, assignedCarrierFlow }) 
       </div>
 
       {/* SECTION 2: MULTI-SKU ORDER ASSIGNMENT SIMULATOR & OPTIMIZER */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
-        <div className="border-b border-slate-800 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+      <div className="bg-slate-900 border border-slate-800 rounded-lg p-3 shadow-md space-y-3">
+        <div className="border-b border-slate-800 pb-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
-            <h3 className="text-base font-extrabold text-white flex items-center gap-2">
-              <DollarSign className="w-5 h-5 text-amber-400" />
+            <h3 className="text-xs font-extrabold text-white flex items-center gap-1.5 uppercase tracking-wider">
+              <DollarSign className="w-4 h-4 text-amber-400" />
               2. Multi-SKU Order Simulator
             </h3>
-            <p className="text-xs text-slate-400">
+            <p className="text-[10px] text-slate-400">
               Select backlog orders or configure custom SKUs/quantities to optimize combined batch profitability across fulfillment routes.
             </p>
           </div>
 
           {/* Form Quick Summary Ribbon */}
-          <div className="flex items-center gap-3 bg-slate-950 px-3.5 py-2 rounded-xl border border-slate-800 text-xs">
+          <div className="flex items-center gap-2 bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800 text-[11px]">
             <div className="text-slate-400 font-medium">
               Items: <span className="text-slate-200 font-bold">{safeItemsList.length} SKUs</span>
             </div>
             <div className="w-px h-3 bg-slate-800" />
             <div className="text-slate-400 font-medium">
-              Total Units: <span className="text-sky-400 font-bold">{totalBatchUnits.toLocaleString()}</span>
+              Units: <span className="text-sky-400 font-bold">{totalBatchUnits.toLocaleString()}</span>
             </div>
             <div className="w-px h-3 bg-slate-800" />
             <div className="text-slate-400 font-medium">
-              Est Revenue: <span className="text-emerald-400 font-bold">${estimatedGrossRev.toLocaleString()}</span>
+              Est Rev: <span className="text-emerald-400 font-bold">${estimatedGrossRev.toLocaleString()}</span>
             </div>
           </div>
         </div>
 
         {/* FEATURE: FUTURE ORDER BACKLOG AUTO-POPULATION SELECTOR */}
-        <div className="bg-slate-950 p-4 rounded-xl border border-sky-500/30 space-y-2.5 shadow-md">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div className="bg-slate-950 p-2.5 rounded-lg border border-sky-500/30 space-y-1.5 shadow-sm">
+          <div className="flex items-center justify-between">
             <label className="text-xs font-bold text-sky-400 flex items-center gap-1.5">
-              <Package className="w-4 h-4 text-diy-orange" />
+              <Package className="w-3.5 h-3.5 text-diy-orange" />
               <span>Select Backlog Order to Auto-Populate:</span>
             </label>
-            <span className="text-[10px] bg-sky-500/20 text-sky-300 border border-sky-500/30 px-2 py-0.5 rounded font-semibold w-fit">
+            <span className="text-[9px] bg-sky-500/20 text-sky-300 border border-sky-500/30 px-1.5 py-0.2 rounded font-semibold">
               Q4 Backlog
             </span>
           </div>
@@ -551,7 +551,7 @@ export default function OrderAssignmentEngine({ filters, assignedCarrierFlow }) 
           <select
             value={selectedBacklogId}
             onChange={(e) => handleSelectBacklogOrder(e.target.value)}
-            className="w-full bg-slate-900 text-slate-100 border border-slate-700 rounded-lg px-3 py-2 text-xs font-semibold focus:outline-none focus:border-sky-500 cursor-pointer"
+            className="w-full bg-slate-900 text-slate-100 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-semibold focus:outline-none focus:border-sky-500 cursor-pointer"
           >
             {(Array.isArray(backlogOrders) ? backlogOrders : DEFAULT_BACKLOG).map((order) => (
               <option key={order.order_id} value={order.order_id}>
@@ -561,15 +561,15 @@ export default function OrderAssignmentEngine({ filters, assignedCarrierFlow }) 
           </select>
         </div>
 
-        <form onSubmit={handleSimulate} className="space-y-4">
+        <form onSubmit={handleSimulate} className="space-y-3">
           {/* Header Controls: Customer & Delivery Date */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-950 p-4 rounded-xl border border-slate-800">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-950 p-2.5 rounded-lg border border-slate-800">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Customer</label>
+              <label className="block text-[10px] font-semibold text-slate-400 mb-1">Customer</label>
               <select
                 value={customerId}
                 onChange={(e) => setCustomerId(e.target.value)}
-                className="w-full bg-slate-900 text-slate-200 border border-slate-700 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-emerald-500 font-medium"
+                className="w-full bg-slate-900 text-slate-200 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs focus:outline-none focus:border-emerald-500 font-medium"
               >
                 <option value="CUST-101">The Home Depot (US East) - Retailer (2-Day SLA)</option>
                 <option value="CUST-102">The Home Depot (US West) - Retailer (2-Day SLA)</option>
@@ -583,24 +583,24 @@ export default function OrderAssignmentEngine({ filters, assignedCarrierFlow }) 
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Target SLA Date</label>
+              <label className="block text-[10px] font-semibold text-slate-400 mb-1">Target SLA Date</label>
               <input
                 type="date"
                 value={promisedDate}
                 onChange={(e) => setPromisedDate(e.target.value)}
-                className="w-full bg-slate-900 text-slate-200 border border-slate-700 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-emerald-500 font-mono font-bold [color-scheme:dark]"
+                className="w-full bg-slate-900 text-slate-200 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs focus:outline-none focus:border-emerald-500 font-mono font-bold [color-scheme:dark]"
               />
             </div>
           </div>
 
           {/* Dynamic Multi-SKU Line Items List */}
-          <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
+          <div className="bg-slate-950 p-2.5 rounded-lg border border-slate-800 space-y-2">
             <div className="flex items-center justify-between text-xs font-bold text-slate-300 pb-1 border-b border-slate-800/80">
               <div className="flex items-center gap-1.5">
-                <Layers className="w-4 h-4 text-emerald-400" />
+                <Layers className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Order SKU Line Items ({safeItemsList.length})</span>
               </div>
-              <span className="text-[11px] text-slate-500">Unconstrained Quantities with DIY Co. Policy Guard-Rails</span>
+              <span className="text-[10px] text-slate-500">DIY Co. Policy Guard-Rails (+50% Cap)</span>
             </div>
 
             {safeItemsList.map((item, index) => {
@@ -615,17 +615,16 @@ export default function OrderAssignmentEngine({ filters, assignedCarrierFlow }) 
               const isBufferAllocated = currentQty > baseQty && currentQty <= maxPolicyQty;
 
               return (
-                <div key={item.id || index} className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center bg-slate-900 p-3.5 rounded-xl border border-slate-800/80 space-y-2 sm:space-y-0">
-                  <div className="sm:col-span-1 text-xs font-mono font-bold text-slate-500 text-center">
+                <div key={item.id || index} className="grid grid-cols-1 sm:grid-cols-12 gap-2 items-center bg-slate-900 p-2 px-2.5 rounded-lg border border-slate-800/80">
+                  <div className="sm:col-span-1 text-[10px] font-mono font-bold text-slate-500 text-center">
                     #{index + 1}
                   </div>
 
                   <div className="sm:col-span-5">
-                    <label className="block text-[10px] text-slate-400 font-semibold mb-0.5 sm:hidden">SKU Model</label>
                     <select
                       value={item.skuId || 'SKU-DRL-01'}
                       onChange={(e) => handleItemChange(item.id, 'skuId', e.target.value)}
-                      className="w-full bg-slate-950 text-slate-200 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs focus:outline-none focus:border-emerald-500 font-medium"
+                      className="w-full bg-slate-950 text-slate-200 border border-slate-700 rounded px-2 py-1 text-xs focus:outline-none focus:border-emerald-500 font-medium"
                     >
                       {SKU_CATALOG.map((sku) => (
                         <option key={sku.id} value={sku.id}>
@@ -635,44 +634,43 @@ export default function OrderAssignmentEngine({ filters, assignedCarrierFlow }) 
                     </select>
 
                     {/* Policy Status Badge */}
-                    <div className="mt-1">
+                    <div className="mt-0.5">
                       {isOverPolicyCap ? (
-                        <div className="flex items-center gap-1.5 text-[10px] text-rose-300 font-bold bg-rose-500/20 border border-rose-500/40 px-2 py-0.5 rounded">
-                          <AlertTriangle className="w-3 h-3 flex-shrink-0 text-rose-400" />
-                          <span>Exceeds +50% Policy Cap (Max allowable: {maxPolicyQty.toLocaleString()} units)</span>
+                        <div className="flex items-center gap-1 text-[9px] text-rose-300 font-bold bg-rose-500/20 border border-rose-500/40 px-1.5 py-0.2 rounded">
+                          <AlertTriangle className="w-2.5 h-2.5 flex-shrink-0 text-rose-400" />
+                          <span>Exceeds +50% Policy Cap ({maxPolicyQty.toLocaleString()} max)</span>
                         </div>
                       ) : isBufferAllocated ? (
-                        <div className="flex items-center gap-1.5 text-[10px] text-emerald-300 font-bold bg-emerald-500/20 border border-emerald-500/40 px-2 py-0.5 rounded">
-                          <CheckCircle2 className="w-3 h-3 flex-shrink-0 text-emerald-400" />
-                          <span>DIY Policy Compliant (+{Math.round(((currentQty - baseQty) / baseQty) * 100)}% Buffer)</span>
+                        <div className="flex items-center gap-1 text-[9px] text-emerald-300 font-bold bg-emerald-500/20 border border-emerald-500/40 px-1.5 py-0.2 rounded">
+                          <CheckCircle2 className="w-2.5 h-2.5 flex-shrink-0 text-emerald-400" />
+                          <span>Policy Compliant (+{Math.round(((currentQty - baseQty) / baseQty) * 100)}% Buffer)</span>
                         </div>
                       ) : (
-                        <div className="text-[10px] text-slate-400 font-medium">
-                          Base Required: {baseQty.toLocaleString()} units | Policy Cap (+50%): {maxPolicyQty.toLocaleString()} units
+                        <div className="text-[9px] text-slate-400 font-medium">
+                          Base: {baseQty.toLocaleString()} | Policy Cap (+50%): {maxPolicyQty.toLocaleString()}
                         </div>
                       )}
                     </div>
                   </div>
 
                   <div className="sm:col-span-3">
-                    <label className="block text-[10px] text-slate-400 font-semibold mb-0.5 sm:hidden">Quantity</label>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5">
                       <input
                         type="number"
                         min="1"
                         step="1"
                         value={item.orderedQty || 100}
                         onChange={(e) => handleItemChange(item.id, 'orderedQty', e.target.value)}
-                        className={`w-full bg-slate-950 text-slate-200 border rounded-lg px-2.5 py-1.5 text-xs focus:outline-none font-mono font-bold ${
+                        className={`w-full bg-slate-950 text-slate-200 border rounded px-2 py-1 text-xs focus:outline-none font-mono font-bold ${
                           isOverPolicyCap ? 'border-rose-500 text-rose-300 ring-1 ring-rose-500/50' : 'border-slate-700 focus:border-emerald-500'
                         }`}
                       />
-                      <span className="text-[11px] text-slate-400 font-semibold">units</span>
+                      <span className="text-[10px] text-slate-400 font-semibold">units</span>
                     </div>
                   </div>
 
                   <div className="sm:col-span-2 text-right">
-                    <span className="text-[10px] text-slate-400 font-medium block">Line Total</span>
+                    <span className="text-[9px] text-slate-400 block">Line Rev</span>
                     <span className="text-xs font-bold text-emerald-400">${lineRev.toLocaleString()}</span>
                   </div>
 
@@ -682,9 +680,9 @@ export default function OrderAssignmentEngine({ filters, assignedCarrierFlow }) 
                       onClick={() => handleRemoveItem(item.id)}
                       disabled={safeItemsList.length <= 1}
                       title="Remove Line Item"
-                      className="p-1.5 text-slate-400 hover:text-rose-400 disabled:opacity-30 disabled:hover:text-slate-400 rounded-lg hover:bg-slate-800 transition-colors"
+                      className="p-1 text-slate-400 hover:text-rose-400 disabled:opacity-30 disabled:hover:text-slate-400 rounded hover:bg-slate-800 transition-colors"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-3.5 h-3.5" />
                     </button>
                   </div>
                 </div>
@@ -692,25 +690,25 @@ export default function OrderAssignmentEngine({ filters, assignedCarrierFlow }) 
             })}
 
             {/* Action Buttons: Add Item & Optimize */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-2 pt-1">
               <button
                 type="button"
                 onClick={handleAddItem}
-                className="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-sky-400 border border-sky-500/30 hover:border-sky-500/60 font-bold px-3.5 py-2 rounded-lg text-xs flex items-center justify-center gap-1.5 transition-all shadow-sm"
+                className="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-sky-400 border border-sky-500/30 hover:border-sky-500/60 font-bold px-3 py-1.5 rounded-lg text-xs flex items-center justify-center gap-1 transition-all shadow-sm"
               >
-                <Plus className="w-4 h-4" /> Add SKU Line Item
+                <Plus className="w-3.5 h-3.5" /> Add SKU Line Item
               </button>
 
               <button
                 type="submit"
                 disabled={loadingSim}
-                className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-600/30 whitespace-nowrap"
+                className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-5 py-1.5 rounded-lg text-xs flex items-center justify-center gap-1.5 transition-all shadow-md shadow-emerald-600/30 whitespace-nowrap"
               >
                 {loadingSim ? (
-                  <RefreshCw className="w-4 h-4 animate-spin" />
+                  <RefreshCw className="w-3.5 h-3.5 animate-spin" />
                 ) : (
                   <>
-                    <Zap className="w-4 h-4" /> Optimize Multi-SKU Order Assignment
+                    <Zap className="w-3.5 h-3.5" /> Optimize Multi-SKU Order Assignment
                   </>
                 )}
               </button>
@@ -719,43 +717,43 @@ export default function OrderAssignmentEngine({ filters, assignedCarrierFlow }) 
         </form>
 
         {dispatchMsg && (
-          <div className="bg-emerald-950/80 border border-emerald-500/50 rounded-xl p-3 text-xs text-emerald-300 font-bold flex items-center gap-2">
-            <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+          <div className="bg-emerald-950/80 border border-emerald-500/50 rounded-lg p-2.5 text-xs text-emerald-300 font-bold flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
             <span>{dispatchMsg}</span>
           </div>
         )}
 
         {/* SECTION 3: FULFILLMENT PATH COMPARISON MATRIX (ALWAYS HIGH TO LOW BY NET PROFIT $) */}
-        <div className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <div className="space-y-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-2">
             <div>
-              <h4 className="text-sm font-bold text-slate-200 flex items-center gap-2">
-                <span>Candidate Fulfillment Paths Ranked High to Low by Combined Net Operating Margin</span>
+              <h4 className="text-xs font-extrabold text-white uppercase tracking-wider">
+                Candidate Fulfillment Paths Ranked High to Low by Net Margin
               </h4>
-              <p className="text-xs text-slate-400">
-                Combined Revenue: <span className="text-white font-bold">${safeNum(sData.request_details?.gross_revenue).toLocaleString()}</span> across {safeNum(sData.request_details?.total_items_count, itemBreakdown.length)} SKUs ({safeNum(sData.request_details?.total_ordered_qty, 1)} total units) to {safeStr(sData.request_details?.customer_name, 'Selected Customer')}
+              <p className="text-[10px] text-slate-400">
+                Gross Revenue: <span className="text-white font-bold">${safeNum(sData.request_details?.gross_revenue).toLocaleString()}</span> across {safeNum(sData.request_details?.total_items_count, itemBreakdown.length)} SKUs ({safeNum(sData.request_details?.total_ordered_qty, 1)} units) to {safeStr(sData.request_details?.customer_name, 'Customer')}
               </p>
             </div>
             <div className="sm:text-right">
               <span className="text-xs text-emerald-400 font-bold">Max Net Margin: {safeNum(sData.max_net_margin_pct)}%</span>
-              <div className="text-[11px] text-slate-400">Profit Lift vs Lowest Path: +${safeNum(sData.potential_profit_lift_dollars).toLocaleString()}</div>
+              <div className="text-[10px] text-slate-400">Profit Lift vs Lowest: +${safeNum(sData.potential_profit_lift_dollars).toLocaleString()}</div>
             </div>
           </div>
 
           {/* Optimized SKU Batch Line Items Summary Pill Bar */}
           {itemBreakdown.length > 0 && (
-            <div className="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1.5">
-              <span className="text-[11px] text-slate-400 font-bold uppercase tracking-wider block">
+            <div className="bg-slate-950 p-2.5 rounded-lg border border-slate-800 space-y-1">
+              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">
                 Optimized Order SKU Batch Breakdown
               </span>
-              <div className="flex flex-wrap items-center gap-2 text-xs">
+              <div className="flex flex-wrap items-center gap-1.5 text-xs">
                 {itemBreakdown.map((line, idx) => {
                   if (!line) return null;
                   return (
-                    <div key={idx} className="bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg flex items-center gap-2">
+                    <div key={idx} className="bg-slate-900 border border-slate-800 px-2.5 py-1 rounded-md flex items-center gap-1.5 text-[11px]">
                       <span className="font-mono font-bold text-sky-400">{safeStr(line.sku_id)}</span>
                       <span className="text-slate-300 font-semibold">{safeStr(line.sku_name)}</span>
-                      <span className="bg-slate-800 text-slate-200 font-bold px-1.5 py-0.5 rounded text-[11px]">
+                      <span className="bg-slate-800 text-slate-200 font-bold px-1.5 py-0.2 rounded text-[10px]">
                         {safeNum(line.ordered_qty)} units
                       </span>
                       <span className="text-emerald-400 font-bold">${safeNum(line.line_revenue).toLocaleString()}</span>
@@ -766,7 +764,7 @@ export default function OrderAssignmentEngine({ filters, assignedCarrierFlow }) 
             </div>
           )}
 
-          <div className="grid grid-cols-1 gap-4">
+          <div className="grid grid-cols-1 gap-2.5">
             {fulfillmentPaths.map((path, idx) => {
               if (!path) return null;
               const isOptimal = Boolean(path.is_optimal_profit_path);
@@ -780,68 +778,68 @@ export default function OrderAssignmentEngine({ filters, assignedCarrierFlow }) 
               return (
                 <div
                   key={path.path_id || idx}
-                  className={`rounded-xl p-5 border transition-all shadow-lg ${
+                  className={`rounded-lg p-3 border transition-all shadow-md ${
                     isSelectedPath
-                      ? 'bg-slate-900 border-2 border-emerald-500 ring-2 ring-emerald-500/40 shadow-xl shadow-emerald-500/10'
+                      ? 'bg-slate-900 border-2 border-emerald-500 ring-1 ring-emerald-500/40 shadow-emerald-500/10'
                       : 'bg-slate-950/90 border-slate-800/80 hover:border-slate-700'
                   }`}
                 >
-                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
                     {/* Left Details */}
-                    <div className="space-y-2 flex-1">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-xs font-mono font-bold text-slate-400 bg-slate-800 px-2 py-0.5 rounded">
+                    <div className="space-y-1.5 flex-1">
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <span className="text-[10px] font-mono font-bold text-slate-400 bg-slate-800 px-1.5 py-0.5 rounded">
                           #{idx + 1} • {safeStr(path.path_id, `PATH-0${idx + 1}`)}
                         </span>
 
                         {isOptimal && (
-                          <span className="px-2.5 py-0.5 text-xs font-extrabold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1 shadow-sm">
-                            <Sparkles className="w-3.5 h-3.5" /> OPTIMAL PROFIT PATH
+                          <span className="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1 shadow-sm">
+                            <Sparkles className="w-3 h-3" /> OPTIMAL PROFIT PATH
                           </span>
                         )}
 
                         {!isOptimal && isSelectedPath && (
-                          <span className="px-2.5 py-0.5 text-xs font-extrabold rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/40 flex items-center gap-1 shadow-sm">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-sky-400" /> SELECTED ALTERNATE PLAN
+                          <span className="px-2 py-0.5 text-[10px] font-extrabold rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/40 flex items-center gap-1 shadow-sm">
+                            <CheckCircle2 className="w-3 h-3 text-sky-400" /> SELECTED ALTERNATE
                           </span>
                         )}
 
-                        <span className={`px-2 py-0.5 text-[11px] font-bold rounded ${
+                        <span className={`px-1.5 py-0.5 text-[10px] font-bold rounded ${
                           safeStr(path.sla_compliance_status).includes('Optimal')
                             ? 'bg-sky-500/20 text-sky-300 border border-sky-500/30'
                             : 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
                         }`}>
-                          {safeStr(path.sla_compliance_status, 'SLA Evaluated')} ({safeNum(path.est_delivery_days)} days delivery)
+                          {safeStr(path.sla_compliance_status, 'SLA Evaluated')} ({safeNum(path.est_delivery_days)}d delivery)
                         </span>
                       </div>
 
                       {/* Origin -> DC -> Carrier */}
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
-                        <div className="flex items-center gap-1.5 text-slate-300">
-                          <Factory className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                          <span className="truncate" title={safeStr(path.factory_name)}>{safeStr(path.factory_name, 'Asia Factory')}</span>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-1.5 text-xs">
+                        <div className="flex items-center gap-1 text-slate-300">
+                          <Factory className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+                          <span className="truncate text-[11px]" title={safeStr(path.factory_name)}>{safeStr(path.factory_name, 'Asia Factory')}</span>
                         </div>
-                        <div className="flex items-center gap-1.5 text-slate-300">
-                          <Building2 className="w-4 h-4 text-sky-400 flex-shrink-0" />
-                          <span className="truncate" title={safeStr(path.dc_name)}>{safeStr(path.dc_name, 'Regional DC')}</span>
+                        <div className="flex items-center gap-1 text-slate-300">
+                          <Building2 className="w-3.5 h-3.5 text-sky-400 flex-shrink-0" />
+                          <span className="truncate text-[11px]" title={safeStr(path.dc_name)}>{safeStr(path.dc_name, 'Regional DC')}</span>
                         </div>
-                        <div className="flex items-center gap-1.5 text-slate-300">
-                          <Truck className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                          <span className="truncate" title={safeStr(path.carrier_name)}>{safeStr(path.carrier_name, 'Carrier Logistics')}</span>
+                        <div className="flex items-center gap-1 text-slate-300">
+                          <Truck className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+                          <span className="truncate text-[11px]" title={safeStr(path.carrier_name)}>{safeStr(path.carrier_name, 'Carrier Logistics')}</span>
                         </div>
                       </div>
 
                       {/* Inventory & Notes */}
-                      <div className="flex items-center justify-between text-xs bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                      <div className="flex items-center justify-between text-[11px] bg-slate-950 p-2 rounded-md border border-slate-800">
                         <div className="flex items-center gap-1.5">
-                          <Package className="w-4 h-4 text-slate-400" />
+                          <Package className="w-3.5 h-3.5 text-slate-400" />
                           <span className="font-semibold text-slate-300">Stock Availability:</span>
                           <span className={safeStr(path.stock_status).includes('100%') ? 'text-emerald-400 font-bold' : 'text-amber-400 font-bold'}>
                             {safeStr(path.stock_status, 'In Stock')} ({safeNum(path.stock_available_qty).toLocaleString()} units available)
                           </span>
                         </div>
                         {isOptimal && (
-                          <p className="text-[11px] text-emerald-300 font-medium italic hidden sm:block">
+                          <p className="text-[10px] text-emerald-300 font-medium italic hidden sm:block">
                             {safeStr(path.recommendation_notes)}
                           </p>
                         )}
@@ -849,15 +847,15 @@ export default function OrderAssignmentEngine({ filters, assignedCarrierFlow }) 
                     </div>
 
                     {/* Right Financial Breakdown */}
-                    <div className="flex items-center gap-4 border-t lg:border-t-0 lg:border-l border-slate-800 pt-3 lg:pt-0 lg:pl-5 min-w-[280px] justify-between lg:justify-end">
-                      <div className="text-right space-y-1">
-                        <div className="text-[11px] text-slate-400">
-                          Freight: <span className="text-slate-200 font-semibold">${safeNum(path.freight_shipping_cost).toLocaleString()}</span> | Penalty Risk: <span className="text-rose-400 font-semibold">${safeNum(path.projected_penalty_risk).toLocaleString()}</span>
+                    <div className="flex items-center gap-3 border-t lg:border-t-0 lg:border-l border-slate-800 pt-2 lg:pt-0 lg:pl-4 min-w-[240px] justify-between lg:justify-end">
+                      <div className="text-right space-y-0.5">
+                        <div className="text-[10px] text-slate-400">
+                          Freight: <span className="text-slate-200 font-semibold">${safeNum(path.freight_shipping_cost).toLocaleString()}</span> | Penalty: <span className="text-rose-400 font-semibold">${safeNum(path.projected_penalty_risk).toLocaleString()}</span>
                         </div>
-                        <div className="text-2xl font-black text-emerald-400">
+                        <div className="text-xl font-black text-emerald-400">
                           ${safeNum(path.net_profit_dollar).toLocaleString()}
                         </div>
-                        <div className="text-xs font-extrabold text-slate-300">
+                        <div className="text-[11px] font-extrabold text-slate-300">
                           {safeNum(path.gross_margin_pct)}% Operating Margin
                         </div>
                       </div>
@@ -866,10 +864,10 @@ export default function OrderAssignmentEngine({ filters, assignedCarrierFlow }) 
                         {isSelectedPath ? (
                           <button
                             onClick={() => setDispatchMsg(`Fulfillment Order Dispatched via ${safeStr(path.path_id)} (${safeStr(path.dc_name, 'DC')} / ${safeStr(path.carrier_name, 'Carrier')})! Promised Delivery: ${promisedDate}`)}
-                            className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-2.5 rounded-xl text-xs flex items-center gap-1.5 shadow-lg shadow-emerald-600/30 transition-all"
+                            className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-1.5 rounded-lg text-xs flex items-center gap-1 shadow-md shadow-emerald-600/30 transition-all"
                           >
-                            <span>Dispatch Plan</span>
-                            <ArrowRight className="w-4 h-4" />
+                            <span>Dispatch</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
                           </button>
                         ) : (
                           <button
@@ -877,9 +875,9 @@ export default function OrderAssignmentEngine({ filters, assignedCarrierFlow }) 
                               setSelectedPathId(path.path_id);
                               setDispatchMsg(`Alternate Plan ${safeStr(path.path_id)} selected for ${safeStr(path.dc_name, 'DC')} via ${safeStr(path.carrier_name, 'Carrier')}! Net Margin: $${safeNum(path.net_profit_dollar).toLocaleString()} (${safeNum(path.gross_margin_pct)}%).`);
                             }}
-                            className="bg-sky-600 hover:bg-sky-500 text-white font-bold px-3.5 py-2 rounded-xl text-xs transition-all border border-sky-500/40 shadow-md shadow-sky-600/20"
+                            className="bg-sky-600 hover:bg-sky-500 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition-all border border-sky-500/40 shadow-sm shadow-sky-600/20"
                           >
-                            Select Alternate
+                            Select Alt
                           </button>
                         )}
                       </div>

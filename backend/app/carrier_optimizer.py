@@ -104,12 +104,18 @@ def audit_current_carrier_performance(orders: List[OrderLineItem]) -> Dict[str, 
     for cname, stats in current_carrier_stats.items():
         audit_list.append({
             "carrier_name": cname,
+            "primary_customer_account": stats["assigned_to"],
             "assigned_to": stats["assigned_to"],
+            "target_sla_hours": stats["sla_target"],
             "sla_target_hours": stats["sla_target"],
+            "actual_avg_transit_hours": stats["actual_avg_hours"],
             "actual_avg_hours": stats["actual_avg_hours"],
             "sla_delay_gap_hours": round(stats["actual_avg_hours"] - stats["sla_target"], 1),
+            "on_time_reliability_pct": stats["on_time_pct"],
             "on_time_pct": stats["on_time_pct"],
+            "penalty_loss_accrued": stats["penalties_caused"],
             "penalties_caused": stats["penalties_caused"],
+            "sla_status": stats["status"],
             "status": stats["status"]
         })
 
@@ -118,9 +124,11 @@ def audit_current_carrier_performance(orders: List[OrderLineItem]) -> Dict[str, 
     return {
         "summary": "Current carrier assignments are sub-optimal for Retailer channels, missing SLA delivery windows by +1.1 to +1.9 days and triggering $634k+ in line penalties.",
         "total_penalty_impact": sum(x["penalties_caused"] for x in audit_list),
+        "carrier_performance": audit_list,
         "carrier_audit": audit_list,
         "available_catalog": CARRIER_CATALOG
     }
+
 
 
 def optimize_carrier_assignment(req: CarrierOptimizationRequest) -> CarrierOptimizationResponse:
